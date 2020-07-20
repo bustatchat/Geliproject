@@ -81,6 +81,5 @@ export class Server {
  * For testing mocha will start express itself
  */
 if (process.env.NODE_ENV !== 'test') {
-  
   new Server().start();
 }
