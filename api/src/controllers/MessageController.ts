@@ -48,6 +48,7 @@ export default class MessageController {
    *        chatName: "student2",
    *        comments: [],
    *        content: "any message",
+   *        author: "5b2d66ca4daf0700d5aff89c",
    *        createdAt: "2018-06-22T21:14:50.924Z",
    *        updatedAt: "2018-06-22T21:14:50.924Z",
    *        room : "5b2d66c84daf0700d5afe7d8",

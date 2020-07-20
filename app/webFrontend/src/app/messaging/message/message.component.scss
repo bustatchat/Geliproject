@@ -12,6 +12,7 @@
     font-size: 0.8em;
     color: grey;
   }
+  
   .content {
     background-color: #e8eaf6;
     overflow-wrap: break-word;
@@ -29,8 +30,14 @@
 .msg-created-at {
   font-size: 0.7em;
   color: gray;
-}
+  float: left;
+  padding-top: 13px;
 
+}
+.delete-btn {
+  color: red;
+  float: right;
+}
 .message-input-field{
   width: 100%;
 }

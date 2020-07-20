@@ -73,11 +73,12 @@ messageSchema.methods.exportJSON = function () {
 };
 
 messageSchema.methods.forDisplay = function (): IMessageDisplay {
-  const {_id, content, room, chatName, comments, updatedAt, createdAt} = this;
+  const {_id, content, room, author, chatName, comments, updatedAt, createdAt} = this;
   return {
     _id: <string>extractMongoId(_id),
     content,
     room: <string>extractMongoId(room),
+    author: <string>extractMongoId(author),
     chatName,
     comments: comments.map((comment: IMessageModel) => comment.forDisplay()),
     updatedAt,
