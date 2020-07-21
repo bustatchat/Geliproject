@@ -9,7 +9,7 @@ export class MessageService extends DataService {
   static readonly API = 'message';
 
   constructor(public backendService: BackendService) {
-    super('message', backendService);
+    super('message/', backendService);
   }
 
   async getMessages(queryParam: any): Promise<IMessageDisplay[]> {
