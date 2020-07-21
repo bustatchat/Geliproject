@@ -15,6 +15,7 @@ export interface IMessageDisplay {
   _id: any;
   content: string;
   room: string;
+  author: any;
   chatName: string;
   comments: IMessageDisplay[];
   updatedAt?: string;
