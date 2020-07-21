@@ -224,7 +224,7 @@ export class GeneralTabComponent implements OnInit {
 
   deleteCourse() {
     this.dialogService.confirmDelete('course', this.courseOb.name).subscribe(async res => {
-      if (res === false) {
+      if (!res) {
         return;
       }
 
