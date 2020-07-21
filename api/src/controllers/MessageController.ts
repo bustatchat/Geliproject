@@ -7,7 +7,9 @@ import {
   UseBefore,
   CurrentUser,
   NotFoundError,
-  ForbiddenError
+  Authorized,
+  ForbiddenError,
+  Delete
 } from 'routing-controllers';
 import {errorCodes} from '../config/errorCodes';
 import {IMessageModel, Message} from '../models/Message';
@@ -91,6 +93,39 @@ export default class MessageController {
     await this.assertUserViewAuthForRoomId(currentUser, roomId);
     const count = await Message.countDocuments({room: roomId});
     return {count};
+  }
+
+  /**
+   * @api {delete} /api/message/:id Delete specific message
+   * @apiName deleteMessage
+   * @apiGroup Message
+   *
+   * @apiParam {String} id Message ID.
+   * @apiParam {IUser} currentUser Currently logged in user.
+   *
+   * @apiSuccess {Object} result Empty object.
+   *
+   * @apiSuccessExample {json} Success-Response:
+   *      {}
+   *
+   * @apiError NotFoundError
+   * @apiError ForbiddenError
+   */
+  @Authorized(['teacher', 'admin', 'student'])
+  @Delete('/:id')
+  async deleteMessage(@QueryParam('id') id: string, @CurrentUser() currentUser: IUser) {
+    const message = await Message.findById(id).orFail(new NotFoundError());
+
+    if (!message) {
+      throw new NotFoundError();
+    }
+
+    /*if (!message.checkPrivileges(currentUser).userCanEditCourse) {
+      throw new ForbiddenError();
+    }*/
+
+    await message.remove();
+    return {};
   }
 
 }
