@@ -9,7 +9,8 @@ import {
   NotFoundError,
   Authorized,
   ForbiddenError,
-  Delete
+  Delete,
+  Param
 } from 'routing-controllers';
 import {errorCodes} from '../config/errorCodes';
 import {IMessageModel, Message} from '../models/Message';
@@ -113,7 +114,7 @@ export default class MessageController {
    */
   @Authorized(['teacher', 'admin', 'student'])
   @Delete('/:id')
-  async deleteMessage(@QueryParam('id') id: string, @CurrentUser() currentUser: IUser) {
+  async deleteMessage(@Param('id') id: string, @CurrentUser() currentUser: IUser) {
     const message = await Message.findById(id).orFail(new NotFoundError());
 
     if (!message) {
