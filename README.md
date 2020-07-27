@@ -10,7 +10,7 @@
 [![DavidDM-API](https://david-dm.org/geli-lms/geli.svg?path=api)](https://david-dm.org/geli-lms/geli?path=api)
 [![DavidDM-WEB](https://david-dm.org/geli-lms/geli.svg?path=app/webFrontend)](https://david-dm.org/geli-lms/geli?path=app/webFrontend)
 
- geli is an open source e-learning platform. Try the [demo] (https://demo.geli.fbi.h-da.de/)! 
+ geli is an open source e-learning platform. Try the [demo](https://demo.geli.fbi.h-da.de/)! 
 
 <!---  The project is mainly developed by Computer Science Master's students at the 
  [University of Applied Sciences in Darmstadt, Germany] (https://www.fbi.h-da.de). --->
