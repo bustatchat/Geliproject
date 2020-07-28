@@ -1,4 +1,9 @@
-<h2>{{ 'common.users' | translate }}</h2>
+<div class="header" fxLayout="row" fxLayoutAlign="space-between center">
+  <h2>{{ 'common.users' | translate }}</h2>
+  <button class="send-mail-button" mat-flat-button color="primary" (click)="openWriteMailDialog()">{{'common.sendToAllUsers' | translate}}
+    <mat-icon>send</mat-icon>
+  </button>
+</div>
 <table class="table">
   <thead>
   <tr>

@@ -516,4 +516,40 @@ export class UserController {
 
     return {result: true};
   }
+
+  /**
+   * @api {post} /api/users/mail Send mail to selected users
+   * @apiName PostCourseMail
+   * @apiGroup Course
+   * @apiPermission teacher
+   * @apiPermission admin
+   *
+   * @apiParam {Object} mailData Mail data.
+   * @apiParam {IUser} currentUser Currently logged in user.
+   *
+   * @apiSuccess {Object} freeFormMail Information about sent email.
+   *
+   * @apiSuccessExample {json} Success-Response:
+   *     {
+   *         "accepted": ["geli.hda@gmail.com"],
+   *         "rejected": [],
+   *         "envelopeTime": 5,
+   *         "messageTime": 4,
+   *         "messageSize": 874,
+   *         "response": "250 ok:  Message 11936348 accepted",
+   *         "envelope": {
+   *             "from": "staging.geli.fbi@h-da.de",
+   *             "to": ["geli.hda@gmail.com"]
+   *         },
+   *         "messageId": "<f70858d7-d9f4-3f5b-a833-d94d2a440b33@h-da.de>"
+   *     }
+   */
+  @Authorized(['admin'])
+  @Post('/mail')
+  sendMailToSelectedUsers(@Body() mailData: any, @CurrentUser() currentUser: IUser) {
+    return emailService.sendFreeFormMail({
+      ...mailData,
+      replyTo: `${currentUser.profile.firstName} ${currentUser.profile.lastName}<${currentUser.email}>`,
+    });
+  }
 }

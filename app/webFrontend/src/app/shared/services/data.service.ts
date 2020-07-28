@@ -455,6 +455,12 @@ export class UserDataService extends DataService {
       .getDownload(url)
       .toPromise();
   }
+
+  sendMailToSelectedUsers(data: any): Promise<any> {
+    return this.backendService
+      .post(this.apiPath + 'mail', JSON.stringify(data))
+      .toPromise();
+  }
 }
 
 @Injectable()

@@ -18,6 +18,10 @@ export class UserAdminComponent implements OnInit {
   allUsers: IUser[];
   availableRoles: String[];
 
+  static getMailAddressStringForUsers(users: IUser[]) {
+    return users.map((user: IUser) => `${user.profile.firstName} ${user.profile.lastName}<${user.email}>`).join(', ');
+  }
+
   constructor(private userDataService: UserDataService,
               private router: Router,
               private showProgress: ShowProgressService,
@@ -96,5 +100,25 @@ export class UserAdminComponent implements OnInit {
         this.getUsers();
         this.showProgress.toggleLoadingGlobal(false);
     });
+  }
+
+  async openWriteMailDialog() {
+    const mailData = await this.dialogService.writeMail({
+      bcc: UserAdminComponent.getMailAddressStringForUsers(this.allUsers),
+      cc: ``,
+      markdown: ``,
+      subject: ``,
+    }).toPromise();
+
+    if (!mailData) {
+      return;
+    }
+
+    try {
+      await this.userDataService.sendMailToSelectedUsers(mailData);
+      this.snackBar.open('Sending mail succeeded.');
+    } catch (err) {
+      this.snackBar.open('Sending mail failed.');
+    }
   }
 }

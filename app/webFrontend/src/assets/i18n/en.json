@@ -132,6 +132,7 @@
     },
     "save": "Save",
     "send": "Send",
+    "sendToAllUsers": "Send email to all",
     "settings": "Settings",
     "statistics": "Statistics",
     "submit": "Submit",
