@@ -52,13 +52,14 @@ export class MessageComponent implements OnInit {
       }
       this.showProgress.toggleLoadingGlobal(true);
       const message = this.message;
-
       try {
         const index = this.messages.indexOf(message);
         this.messages.splice(index, 1);
         await this.messageService.deleteItem(message);
         this.snackBar.open('Message ' + message.content + ' was successfully deleted.');
       } catch (err) {
+        this.snackBar.open(err.error.message);
+      }
 
       this.showProgress.toggleLoadingGlobal(false);
     });
